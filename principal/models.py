@@ -391,7 +391,7 @@ class Departamento(models.Model):
     )
 
     class Meta:
-        db_table = 'departament'
+        db_table = 'department'
         verbose_name = 'Departamento'
         verbose_name_plural = 'Departamentos'
         managed = True
@@ -408,6 +408,15 @@ class Funcionario(models.Model):
         db_column='id_manager',
         null=True,
         blank=True,
+        related_name='funcionarios'
+    )
+
+    departamento = models.ForeignKey(
+        to='Departamento',
+        on_delete=models.DO_NOTHING,
+        db_column='id_department',
+        null=False,
+        blank=False,
         related_name='funcionarios'
     )
 
@@ -501,7 +510,7 @@ class Venda(models.Model):
     cliente = models.ForeignKey(
         to='Cliente',
         on_delete=models.DO_NOTHING,
-        db_column='id_cliente',
+        db_column='id_customer',
         null=False,
         blank=False,
         related_name='vendas'
@@ -704,7 +713,7 @@ class FornecedorProduto(models.Model):
     distrito = models.ForeignKey(
         to='Distrito',
         on_delete=models.DO_NOTHING,
-        db_column='id_distrito',
+        db_column='id_district',
         null=False,
         blank=False,
         related_name='fornecedor_produto'
@@ -753,7 +762,7 @@ class Produto(models.Model):
     grupo_de_produto = models.ForeignKey(
         to='GrupoProduto',
         on_delete=models.DO_NOTHING,
-        db_column='id_grupo_de_produto',
+        db_column='id_product_group',
         null=False,
         blank=False,
         related_name='produtos'
@@ -762,7 +771,7 @@ class Produto(models.Model):
     fornecedor_produto = models.ForeignKey(
         to='FornecedorProduto',
         on_delete=models.DO_NOTHING,
-        db_column='id_fornecedor_produto',
+        db_column='id_supplier',
         null=False,
         blank=False,
         related_name='produtos'
