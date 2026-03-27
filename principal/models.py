@@ -1,38 +1,38 @@
 from django.db import models
 
 # Create your models here.
-class Estado(models.Model):
+class State(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False,
     )
 
-    abreviacao = models.CharField(
+    abbreviation = models.CharField(
         db_column='tx_abbreviation',
         max_length=2,
         null=False,
         blank=False,
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -41,47 +41,47 @@ class Estado(models.Model):
 
     class Meta:
         db_table = 'state'
-        verbose_name = 'Estado'
-        verbose_name_plural = 'Estados'
+        verbose_name = 'State'
+        verbose_name_plural = 'States'
         managed = True
 
     def __str__(self):
-        return f"Estado {self.id} - {self.nome}"
+        return f"State {self.id} - {self.name}"
 
-class Cidade(models.Model):
+class City(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    estado = models.ForeignKey(
-        to='Estado',
+    state = models.ForeignKey(
+        to='State',
         on_delete=models.DO_NOTHING,
         db_column='id_state',
         null=False,
         blank=False,
-        related_name='cidades'
+        related_name='cities'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False,
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -90,39 +90,39 @@ class Cidade(models.Model):
 
     class Meta:
         db_table = 'city'
-        verbose_name = 'Cidade'
-        verbose_name_plural = 'Cidades'
+        verbose_name = 'City'
+        verbose_name_plural = 'Cities'
         managed = True
-        unique_together = ('estado', 'nome')
+        unique_together = ('state', 'name')
 
     def __str__(self):
-        return f"Cidade {self.id} - Estado: {self.estado.nome}"
+        return f"City {self.id} - State: {self.state.name}"
 
-class Zona(models.Model):
+class Zone(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False,
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -131,56 +131,56 @@ class Zona(models.Model):
 
     class Meta:
         db_table = 'zone'
-        verbose_name = 'Zona'
-        verbose_name_plural = 'Zonas'
+        verbose_name = 'Zone'
+        verbose_name_plural = 'Zones'
         managed = True
 
     def __str__(self):
-        return f"Zona {self.id} {str(self.nome)}"
+        return f"Zone {self.id} {str(self.name)}"
 
-class Distrito(models.Model):
+class District(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    zona = models.ForeignKey(
-        to='Zona',
+    zone = models.ForeignKey(
+        to='Zone',
         on_delete=models.DO_NOTHING,
         db_column='id_zone',
         null=False,
         blank=False,
-        related_name='distritos'
+        related_name='districts'
     )
 
-    cidade = models.ForeignKey(
-        to='Cidade',
+    city = models.ForeignKey(
+        to='City',
         on_delete=models.DO_NOTHING,
         db_column='id_city',
         null=False,
         blank=False,
-        related_name='distritos'
+        related_name='districts'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False,
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -189,48 +189,48 @@ class Distrito(models.Model):
 
     class Meta:
         db_table = 'district'
-        verbose_name = 'Distrito'
-        verbose_name_plural = 'Distritos'
+        verbose_name = 'District'
+        verbose_name_plural = 'Districts'
         managed = True
-        unique_together = ('zona', 'cidade', 'nome')
+        unique_together = ('zone', 'city', 'name')
 
     def __str__(self):
-        return f"Distrito {self.id} - Cidade: {self.cidade.nome} - Zona: {self.zona.nome}"
+        return f"District {self.id} - City: {self.city.name} - Zone: {self.zone.name}"
 
-class Filial(models.Model):
+class BranchOffice(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    distrito = models.ForeignKey(
-        to='Distrito',
+    district = models.ForeignKey(
+        to='District',
         on_delete=models.DO_NOTHING,
         db_column='id_district',
         null=False,
         blank=False,
-        related_name='filiais'
+        related_name='branch_offices'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -239,38 +239,38 @@ class Filial(models.Model):
 
     class Meta:
         db_table = 'branch_office'
-        verbose_name = 'Filial'
-        verbose_name_plural = 'Filiais'
+        verbose_name = 'Branch Office'
+        verbose_name_plural = 'Branch Offices'
         managed = True
 
     def __str__(self):
-        return f"Filial {self.id} {self.nome}"
+        return f"Branch Office {self.id} {self.name}"
 
-class EstadoCivil(models.Model):
+class MaritalStatus(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    descricao = models.CharField(
+    description = models.CharField(
         db_column='tx_description',
         max_length=54,
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -279,42 +279,42 @@ class EstadoCivil(models.Model):
 
     class Meta:
         db_table = 'marital_status'
-        verbose_name = 'Estado Civil'
-        verbose_name_plural = 'Estados Civis'
+        verbose_name = 'Marital Status'
+        verbose_name_plural = 'Marital Statuses'
         managed = True
 
     def __str__(self):
-        return f"Estado civil {self.id} {self.descricao}"
+        return f"Marital Status {self.id} {self.description}"
 
-class Cliente(models.Model):
+class Customer(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    estado_civil = models.ForeignKey(
-        to='EstadoCivil',
+    marital_status = models.ForeignKey(
+        to='MaritalStatus',
         on_delete=models.DO_NOTHING,
         db_column='id_marital_status',
         null=False,
         blank=False,
-        related_name='clientes'
+        related_name='customers'
     )
 
-    distrito = models.ForeignKey(
-        to='Distrito',
+    district = models.ForeignKey(
+        to='District',
         on_delete=models.DO_NOTHING,
         db_column='id_district',
         null=False,
         blank=False,
-        related_name='clientes'
+        related_name='customers'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False
     )
 
-    salario = models.DecimalField(
+    salary = models.DecimalField(
         db_column='nb_salary',
         max_digits=10,
         decimal_places=4,
@@ -322,28 +322,28 @@ class Cliente(models.Model):
         blank=False,
     )
 
-    genero = models.CharField(
+    gender = models.CharField(
         db_column='cs_gender',
         max_length=1,
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -352,38 +352,38 @@ class Cliente(models.Model):
 
     class Meta:
         db_table = 'customer'
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
+        verbose_name = 'Customer'
+        verbose_name_plural = 'Customers'
         managed = True
 
     def __str__(self):
-        return f"Cliente {self.id}: {self.nome}"
+        return f"Customer {self.id}: {self.name}"
 
-class Departamento(models.Model):
+class Department(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -392,51 +392,51 @@ class Departamento(models.Model):
 
     class Meta:
         db_table = 'department'
-        verbose_name = 'Departamento'
-        verbose_name_plural = 'Departamentos'
+        verbose_name = 'Department'
+        verbose_name_plural = 'Departments'
         managed = True
 
     def __str__(self):
-        return f"Departamento {self.id}"
+        return f"Department {self.id}"
 
-class Funcionario(models.Model):
+class Employee(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    gerente = models.ForeignKey(
+    manager = models.ForeignKey(
         to='self',
         on_delete=models.SET_NULL,
         db_column='id_manager',
         null=True,
         blank=True,
-        related_name='funcionarios'
+        related_name='employees'
     )
 
-    departamento = models.ForeignKey(
-        to='Departamento',
+    department = models.ForeignKey(
+        to='Department',
         on_delete=models.DO_NOTHING,
         db_column='id_department',
         null=False,
         blank=False,
-        related_name='funcionarios'
+        related_name='employees'
     )
 
-    estado_civil = models.ForeignKey(
-        to='EstadoCivil',
+    marital_status = models.ForeignKey(
+        to='MaritalStatus',
         on_delete=models.DO_NOTHING,
         db_column='id_marital_status',
         null=False,
         blank=False,
-        related_name='funcionarios'
+        related_name='employees'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False
     )
 
-    salario = models.DecimalField(
+    salary = models.DecimalField(
         db_column='nb_salary',
         max_digits=10,
         decimal_places=4,
@@ -444,33 +444,33 @@ class Funcionario(models.Model):
         blank=False,
     )
 
-    admissao = models.DateField(
+    adminission = models.DateField(
         db_column='dt_adminission',
         null=False,
         blank=False
     )
 
-    nascimento = models.DateField(
+    birth = models.DateField(
         db_column='dt_birth',
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -479,64 +479,64 @@ class Funcionario(models.Model):
 
     class Meta:
         db_table = 'employee'
-        verbose_name = 'Funcionario'
-        verbose_name_plural = 'Funcionarios'
+        verbose_name = 'Employee'
+        verbose_name_plural = 'Employees'
         managed = True
 
     def __str__(self):
-        return f"Funcionario {self.nome}"
+        return f"Employee {self.name}"
 
-class Venda(models.Model):
+class Sale(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    filial = models.ForeignKey(
-        to='Filial',
+    branch_office = models.ForeignKey(
+        to='BranchOffice',
         on_delete=models.DO_NOTHING,
         db_column='id_branch_office',
         null=False,
         blank=False,
-        related_name='vendas'
+        related_name='sales'
     )
 
-    funcionario = models.ForeignKey(
-        to='Funcionario',
+    employee = models.ForeignKey(
+        to='Employee',
         on_delete=models.DO_NOTHING,
         db_column='id_employee',
         null=False,
         blank=False,
-        related_name='vendas'
+        related_name='sales'
     )
 
-    cliente = models.ForeignKey(
-        to='Cliente',
+    customer = models.ForeignKey(
+        to='Customer',
         on_delete=models.DO_NOTHING,
         db_column='id_customer',
         null=False,
         blank=False,
-        related_name='vendas'
+        related_name='sales'
     )
 
-    vendido_em = models.DateTimeField(
+    sold_at = models.DateTimeField(
         db_column='dt_sale',
         null=True,
         blank=True
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -545,38 +545,38 @@ class Venda(models.Model):
 
     class Meta:
         db_table = 'sale'
-        verbose_name = 'Venda'
-        verbose_name_plural = 'Vendas'
+        verbose_name = 'Sale'
+        verbose_name_plural = 'Sales'
         managed = True
 
     def __str__(self):
-        return f"Venda {self.id} - Cliente: {self.cliente.nome}"
+        return f"Sale {self.id} - Customer: {self.customer.name}"
 
-class FormaPagamento(models.Model):
+class MeansPayment(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    descricao = models.CharField(
+    description = models.CharField(
         db_column='tx_description',
         max_length=54,
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -585,35 +585,35 @@ class FormaPagamento(models.Model):
 
     class Meta:
         db_table = 'means_payment'
-        verbose_name = 'Forma de Pagamento'
-        verbose_name_plural = 'Formas de Pagamento'
+        verbose_name = 'Means Payment'
+        verbose_name_plural = 'Means Payments'
         managed = True
 
     def __str__(self):
-        return f"Pagamento {self.id} {str(self.descricao)}"
+        return f"Means Payment {self.id} {str(self.description)}"
 
-class PagamentoVenda(models.Model):
+class SalePayment(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    venda = models.ForeignKey(
-        to='Venda',
+    sale = models.ForeignKey(
+        to='Sale',
         on_delete=models.DO_NOTHING,
         db_column='id_sale',
         null=False,
         blank=False,
-        related_name='pagamentos_das_venda'
+        related_name='sale_payments'
     )
 
-    forma_pagamento = models.ForeignKey(
-        to='FormaPagamento',
+    means_payment = models.ForeignKey(
+        to='MeansPayment',
         on_delete=models.DO_NOTHING,
         db_column='id_means_payment',
         null=False,
         blank=False,
-        related_name='pagamentos_das_vendas'
+        related_name='sale_payments'
     )
 
-    valor = models.DecimalField(
+    value = models.DecimalField(
         db_column='nb_value',
         max_digits=10,
         decimal_places=4,
@@ -621,21 +621,21 @@ class PagamentoVenda(models.Model):
         blank=False,
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -644,24 +644,24 @@ class PagamentoVenda(models.Model):
 
     class Meta:
         db_table = 'means_payment_sale'
-        verbose_name = 'Pagamento da Venda'
-        verbose_name_plural = 'Pagamentos das Vendas'
+        verbose_name = 'Sale Payment'
+        verbose_name_plural = 'Sale Payments'
         managed = True
 
     def __str__(self):
-        return f"Pagamento {self.id} {str(self.forma_pagamento)}"
+        return f"Sale Payment {self.id} {str(self.means_payment)}"
 
-class GrupoProduto(models.Model):
+class ProductGroup(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    descricao = models.CharField(
+    description = models.CharField(
         db_column='tx_description',
         max_length=54,
         null=False,
         blank=False
     )
 
-    percentual_comissao = models.DecimalField(
+    commission_percentage = models.DecimalField(
         db_column='nb_commission_percentage',
         max_digits=10,
         decimal_places=4,
@@ -669,7 +669,7 @@ class GrupoProduto(models.Model):
         blank=False
     )
 
-    percentual_ganho = models.DecimalField(
+    gain_percentage = models.DecimalField(
         db_column='nb_gain_percentage',
         max_digits=10,
         decimal_places=4,
@@ -677,21 +677,21 @@ class GrupoProduto(models.Model):
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -700,47 +700,47 @@ class GrupoProduto(models.Model):
 
     class Meta:
         db_table = 'product_group'
-        verbose_name = 'Grupo de Produto'
-        verbose_name_plural = 'Grupos de Produtos'
+        verbose_name = 'Product Group'
+        verbose_name_plural = 'Product Groups'
         managed = True
 
     def __str__(self):
-        return f"Grupo de Produto {self.id} {str(self.descricao)}"
+        return f"Product Group {self.id} {str(self.description)}"
 
-class FornecedorProduto(models.Model):
+class Supplier(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    distrito = models.ForeignKey(
-        to='Distrito',
+    district = models.ForeignKey(
+        to='District',
         on_delete=models.DO_NOTHING,
         db_column='id_district',
         null=False,
         blank=False,
-        related_name='fornecedor_produto'
+        related_name='suppliers'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=54,
         null=False,
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -749,42 +749,42 @@ class FornecedorProduto(models.Model):
 
     class Meta:
         db_table = 'supplier'
-        verbose_name = 'Fornecedor de Produto'
-        verbose_name_plural = 'Fornecedores de Produtos'
+        verbose_name = 'Supplier'
+        verbose_name_plural = 'Suppliers'
         managed = True
 
     def __str__(self):
-        return f"Fornecedor de Produto {self.id} - {str(self.nome)} - {str(self.distrito)}"
+        return f"Supplier {self.id} - {str(self.name)} - {str(self.district)}"
 
-class Produto(models.Model):
+class Product(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    grupo_de_produto = models.ForeignKey(
-        to='GrupoProduto',
+    product_group = models.ForeignKey(
+        to='ProductGroup',
         on_delete=models.DO_NOTHING,
         db_column='id_product_group',
         null=False,
         blank=False,
-        related_name='produtos'
+        related_name='products'
     )
 
-    fornecedor_produto = models.ForeignKey(
-        to='FornecedorProduto',
+    supplier = models.ForeignKey(
+        to='Supplier',
         on_delete=models.DO_NOTHING,
         db_column='id_supplier',
         null=False,
         blank=False,
-        related_name='produtos'
+        related_name='products'
     )
 
-    nome = models.CharField(
+    name = models.CharField(
         db_column='tx_name',
         max_length=104,
         null=False,
         blank=False
     )
 
-    preco_custo = models.DecimalField(
+    cost_price = models.DecimalField(
         db_column='nb_cost_price',
         max_digits=10,
         decimal_places=4,
@@ -792,7 +792,7 @@ class Produto(models.Model):
         blank=False
     )
 
-    preco_venda = models.DecimalField(
+    sale_price = models.DecimalField(
         db_column='nb_sale_price',
         max_digits=10,
         decimal_places=4,
@@ -800,21 +800,21 @@ class Produto(models.Model):
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -823,35 +823,35 @@ class Produto(models.Model):
 
     class Meta:
         db_table = 'product'
-        verbose_name = 'Produto'
-        verbose_name_plural = 'Produtos'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
         managed = True
 
     def __str__(self):
-        return f"Produto {self.id} - {str(self.nome)}"
+        return f"Product {self.id} - {str(self.name)}"
 
-class ItemVenda(models.Model):
+class SaleItem(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    venda = models.ForeignKey(
-        to='Venda',
+    sale = models.ForeignKey(
+        to='Sale',
         on_delete=models.DO_NOTHING,
         db_column='id_sale',
         null=False,
         blank=False,
-        related_name='items_venda'
+        related_name='sale_items'
     )
 
-    produto = models.ForeignKey(
-        to='Produto',
+    product = models.ForeignKey(
+        to='Product',
         on_delete=models.DO_NOTHING,
         db_column='id_product',
         null=False,
         blank=False,
-        related_name='items_venda'
+        related_name='sale_items'
     )
 
-    quantidade = models.DecimalField(
+    quantity = models.DecimalField(
         db_column='nb_quantity',
         max_digits=10,
         decimal_places=3,
@@ -859,7 +859,7 @@ class ItemVenda(models.Model):
         blank=False
     )
 
-    preco_venda = models.DecimalField(
+    sale_price = models.DecimalField(
         db_column='nb_sale_price',
         max_digits=10,
         decimal_places=4,
@@ -875,21 +875,21 @@ class ItemVenda(models.Model):
         blank=False
     )
 
-    ativo = models.BooleanField(
+    is_active = models.BooleanField(
         db_column='cs_active',
         default=True,
         null=False,
         blank=False
     )
 
-    criado_em = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
         db_column='dt_created_at',
         null=False,
         blank=False
     )
 
-    modificado_em = models.DateTimeField(
+    modified_at = models.DateTimeField(
         auto_now=True,
         db_column='dt_modified_at',
         null=False,
@@ -898,9 +898,9 @@ class ItemVenda(models.Model):
 
     class Meta:
         db_table = 'sale_item'
-        verbose_name = 'Item de Venda'
-        verbose_name_plural = 'Itens de Vendas'
+        verbose_name = 'Sale Item'
+        verbose_name_plural = 'Sale Items'
         managed = True
 
     def __str__(self):
-        return f"Item de Venda {self.id} - {str(self.venda)}"
+        return f"Sale Item {self.id} - {str(self.sale)}"
