@@ -238,7 +238,7 @@ class Filial(models.Model):
     )
 
     class Meta:
-        db_table = 'branch_office',
+        db_table = 'branch_office'
         verbose_name = 'Filial'
         verbose_name_plural = 'Filiais'
         managed = True
@@ -391,7 +391,7 @@ class Departamento(models.Model):
     )
 
     class Meta:
-        db_table = 'departament',
+        db_table = 'departament'
         verbose_name = 'Departamento'
         verbose_name_plural = 'Departamentos'
         managed = True
