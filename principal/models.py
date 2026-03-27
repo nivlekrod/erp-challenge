@@ -192,10 +192,10 @@ class Distrito(models.Model):
         verbose_name = 'Distrito'
         verbose_name_plural = 'Distritos'
         managed = True
-        unique_together = ('zona', 'cidade')
+        unique_together = ('zona', 'cidade', 'nome')
 
     def __str__(self):
-        return f"Distrito {self.id} - Cidade: {self.cidade.nome}"
+        return f"Distrito {self.id} - Cidade: {self.cidade.nome} - Zona: {self.zona.nome}"
 
 class Filial(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -779,7 +779,7 @@ class Produto(models.Model):
 
     nome = models.CharField(
         db_column='tx_name',
-        max_length=54,
+        max_length=104,
         null=False,
         blank=False
     )
