@@ -99,4 +99,4 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 class SaleItemSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = SaleItem
-		fields = ['sale', 'product', 'quantity', 'sale_price', 'name', 'is_active', 'created_at', 'modified_at']
+		fields = ['sale', 'product', 'quantity', 'sale_price', 'subtotal', 'is_active', 'created_at', 'modified_at']
