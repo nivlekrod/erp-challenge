@@ -53,7 +53,7 @@ class City(models.Model):
 
     state = models.ForeignKey(
         to='State',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_state',
         null=False,
         blank=False,
@@ -143,7 +143,7 @@ class District(models.Model):
 
     zone = models.ForeignKey(
         to='Zone',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_zone',
         null=False,
         blank=False,
@@ -152,7 +152,7 @@ class District(models.Model):
 
     city = models.ForeignKey(
         to='City',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_city',
         null=False,
         blank=False,
@@ -202,7 +202,7 @@ class BranchOffice(models.Model):
 
     district = models.ForeignKey(
         to='District',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_district',
         null=False,
         blank=False,
@@ -291,7 +291,7 @@ class Customer(models.Model):
 
     marital_status = models.ForeignKey(
         to='MaritalStatus',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
         db_column='id_marital_status',
         null=False,
         blank=False,
@@ -300,7 +300,7 @@ class Customer(models.Model):
 
     district = models.ForeignKey(
         to='District',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_district',
         null=False,
         blank=False,
@@ -413,7 +413,7 @@ class Employee(models.Model):
 
     department = models.ForeignKey(
         to='Department',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_department',
         null=False,
         blank=False,
@@ -422,7 +422,7 @@ class Employee(models.Model):
 
     marital_status = models.ForeignKey(
         to='MaritalStatus',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
         db_column='id_marital_status',
         null=False,
         blank=False,
@@ -491,7 +491,7 @@ class Sale(models.Model):
 
     branch_office = models.ForeignKey(
         to='BranchOffice',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_branch_office',
         null=False,
         blank=False,
@@ -500,7 +500,7 @@ class Sale(models.Model):
 
     employee = models.ForeignKey(
         to='Employee',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_employee',
         null=False,
         blank=False,
@@ -509,7 +509,7 @@ class Sale(models.Model):
 
     customer = models.ForeignKey(
         to='Customer',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_customer',
         null=False,
         blank=False,
@@ -597,7 +597,7 @@ class SalePayment(models.Model):
 
     sale = models.ForeignKey(
         to='Sale',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_sale',
         null=False,
         blank=False,
@@ -606,7 +606,7 @@ class SalePayment(models.Model):
 
     means_payment = models.ForeignKey(
         to='MeansPayment',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
         db_column='id_means_payment',
         null=False,
         blank=False,
@@ -712,7 +712,7 @@ class Supplier(models.Model):
 
     district = models.ForeignKey(
         to='District',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_district',
         null=False,
         blank=False,
@@ -761,7 +761,7 @@ class Product(models.Model):
 
     product_group = models.ForeignKey(
         to='ProductGroup',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.PROTECT,
         db_column='id_product_group',
         null=False,
         blank=False,
@@ -770,7 +770,7 @@ class Product(models.Model):
 
     supplier = models.ForeignKey(
         to='Supplier',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_supplier',
         null=False,
         blank=False,
@@ -835,7 +835,7 @@ class SaleItem(models.Model):
 
     sale = models.ForeignKey(
         to='Sale',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_sale',
         null=False,
         blank=False,
@@ -844,7 +844,7 @@ class SaleItem(models.Model):
 
     product = models.ForeignKey(
         to='Product',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         db_column='id_product',
         null=False,
         blank=False,
