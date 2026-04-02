@@ -16,7 +16,7 @@ class StateSerializer(serializers.ModelSerializer):
 class CitySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = City
-		fields = ['id', 'state', 'name']
+		fields = ['id', 'state', 'name', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
@@ -44,16 +44,14 @@ class BranchOfficeSerializer(serializers.ModelSerializer):
 class MaritalStatusSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = MaritalStatus
-		fields = ['id', 'description', 'is_active', 'created_at', 'modified_at']
+		fields = ['id', 'name', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
 class CustomerSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Customer
-		fields = ['id', 'marital_status', 'district', 'name', 'salary', 'gender', 'is_active',
-				  'created_at',
-				  'modified_at']
+		fields = ['id', 'marital_status', 'district', 'name', 'income', 'gender', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
@@ -67,18 +65,14 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class EmployeeSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Employee
-		fields = ['id', 'manager', 'department', 'marital_status', 'name', 'salary', 'adminission',
-				  'birth',
-				  'is_active',
-				  'created_at', 'modified_at']
+		fields = ['id', 'district', 'department', 'marital_status', 'name', 'salary', 'admission', 'birth', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
 class SaleSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Sale
-		fields = ['id', 'branch_office', 'employee', 'customer', 'sold_at', 'is_active',
-				  'created_at', 'modified_at']
+		fields = ['id', 'branch_office', 'employee', 'customer', 'sold_at', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
@@ -99,32 +93,26 @@ class SalePaymentSerializer(serializers.ModelSerializer):
 class ProductGroupSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = ProductGroup
-		fields = ['id', 'description', 'commission_percentage', 'gain_percentage', 'is_active',
-				  'created_at',
-				  'modified_at']
+		fields = ['id', 'name', 'commission_percentage', 'gain_percentage', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
 class SupplierSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Supplier
-		fields = ['id', 'district', 'name', 'is_active', 'created_at', 'modified_at']
+		fields = ['id', 'name', 'legal_document', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
 class ProductSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Product
-		fields = ['id', 'product_group', 'supplier', 'name', 'cost_price', 'sale_price',
-				  'is_active', 'created_at',
-				  'modified_at']
+		fields = ['id', 'product_group', 'supplier', 'name', 'cost_price', 'sale_price', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
 class SaleItemSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = SaleItem
-		fields = ['id', 'sale', 'product', 'quantity', 'sale_price', 'subtotal', 'is_active',
-				  'created_at',
-				  'modified_at']
+		fields = ['id', 'sale', 'product', 'quantity', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']

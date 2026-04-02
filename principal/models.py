@@ -5,21 +5,21 @@ class State(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False,
     )
 
     abbreviation = models.CharField(
-        db_column='tx_abbreviation',
+        db_column='abbreviation',
         max_length=2,
         null=False,
         blank=False,
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -27,14 +27,14 @@ class State(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -61,14 +61,14 @@ class City(models.Model):
     )
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False,
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -76,14 +76,14 @@ class City(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -102,14 +102,14 @@ class Zone(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False,
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -117,14 +117,14 @@ class Zone(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -136,7 +136,7 @@ class Zone(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Zone {self.id} {str(self.name)}"
+        return f"Zone {self.id} {self.name}"
 
 class District(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -160,14 +160,14 @@ class District(models.Model):
     )
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False,
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -175,14 +175,14 @@ class District(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -210,14 +210,14 @@ class BranchOffice(models.Model):
     )
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -225,20 +225,20 @@ class BranchOffice(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
 
     class Meta:
-        db_table = 'branch_office'
+        db_table = 'branch'
         verbose_name = 'Branch Office'
         verbose_name_plural = 'Branch Offices'
         managed = True
@@ -249,15 +249,15 @@ class BranchOffice(models.Model):
 class MaritalStatus(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    description = models.CharField(
-        db_column='tx_description',
-        max_length=54,
+    name = models.CharField(
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -265,14 +265,14 @@ class MaritalStatus(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -284,7 +284,7 @@ class MaritalStatus(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Marital Status {self.id} {self.description}"
+        return f"Marital Status {self.id} {self.name}"
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -308,29 +308,34 @@ class Customer(models.Model):
     )
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
-    salary = models.DecimalField(
-        db_column='nb_salary',
-        max_digits=10,
-        decimal_places=4,
+    income = models.DecimalField(
+        db_column='income',
+        max_digits=16,
+        decimal_places=2,
         null=False,
-        blank=False,
+        blank=False
     )
 
+    GENDER_CHOICES = [
+        ('M', 'MALE'),
+        ('F', 'FEMALE'),
+    ]
     gender = models.CharField(
-        db_column='cs_gender',
+        db_column='gender',
         max_length=1,
+        choices=GENDER_CHOICES,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -338,14 +343,14 @@ class Customer(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -363,14 +368,14 @@ class Department(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -378,14 +383,14 @@ class Department(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -402,12 +407,12 @@ class Department(models.Model):
 class Employee(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    manager = models.ForeignKey(
-        to='self',
-        on_delete=models.SET_NULL,
-        db_column='id_manager',
-        null=True,
-        blank=True,
+    district = models.ForeignKey(
+        to='District',
+        on_delete=models.CASCADE,
+        db_column='id_district',
+        null=False,
+        blank=False,
         related_name='employees'
     )
 
@@ -430,34 +435,46 @@ class Employee(models.Model):
     )
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
     salary = models.DecimalField(
-        db_column='nb_salary',
-        max_digits=10,
-        decimal_places=4,
+        db_column='salary',
+        max_digits=16,
+        decimal_places=2,
         null=False,
         blank=False,
     )
 
-    adminission = models.DateField(
-        db_column='dt_adminission',
+    admission = models.DateField(
+        db_column='admission_date',
         null=False,
         blank=False
     )
 
     birth = models.DateField(
-        db_column='dt_birth',
+        db_column='birth_date',
+        null=False,
+        blank=False
+    )
+
+    GENDER_CHOICES = [
+        ('M', 'MALE'),
+        ('F', 'FEMALE'),
+    ]
+    gender = models.CharField(
+        db_column='gender',
+        max_length=1,
+        choices=GENDER_CHOICES,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -465,14 +482,14 @@ class Employee(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -492,7 +509,7 @@ class Sale(models.Model):
     branch_office = models.ForeignKey(
         to='BranchOffice',
         on_delete=models.CASCADE,
-        db_column='id_branch_office',
+        db_column='id_branch',
         null=False,
         blank=False,
         related_name='sales'
@@ -517,13 +534,13 @@ class Sale(models.Model):
     )
 
     sold_at = models.DateTimeField(
-        db_column='dt_sale',
-        null=True,
-        blank=True
+        db_column='date',
+        null=False,
+        blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -531,14 +548,14 @@ class Sale(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -556,14 +573,14 @@ class MeansPayment(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
     description = models.CharField(
-        db_column='tx_description',
-        max_length=54,
+        db_column='description',
+        max_length=64,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -571,14 +588,14 @@ class MeansPayment(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -590,7 +607,7 @@ class MeansPayment(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Means Payment {self.id} {str(self.description)}"
+        return f"Means Payment {self.id} {self.description}"
 
 class SalePayment(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -614,15 +631,15 @@ class SalePayment(models.Model):
     )
 
     value = models.DecimalField(
-        db_column='nb_value',
-        max_digits=10,
-        decimal_places=4,
+        db_column='value',
+        max_digits=16,
+        decimal_places=2,
         null=False,
         blank=False,
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -630,14 +647,14 @@ class SalePayment(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -649,36 +666,36 @@ class SalePayment(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Sale Payment {self.id} {str(self.means_payment)}"
+        return f"Sale Payment {self.id} {self.means_payment}"
 
 class ProductGroup(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    description = models.CharField(
-        db_column='tx_description',
-        max_length=54,
+    name = models.CharField(
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
     commission_percentage = models.DecimalField(
-        db_column='nb_commission_percentage',
-        max_digits=10,
-        decimal_places=4,
+        db_column='commission_percentage',
+        max_digits=5,
+        decimal_places=2,
         null=False,
         blank=False
     )
 
     gain_percentage = models.DecimalField(
-        db_column='nb_gain_percentage',
-        max_digits=10,
-        decimal_places=4,
+        db_column='gain_percentage',
+        max_digits=5,
+        decimal_places=2,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -686,14 +703,14 @@ class ProductGroup(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -705,29 +722,27 @@ class ProductGroup(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Product Group {self.id} {str(self.description)}"
+        return f"Product Group {self.id} {self.name}"
 
 class Supplier(models.Model):
     id = models.AutoField(primary_key=True, null=False)
 
-    district = models.ForeignKey(
-        to='District',
-        on_delete=models.CASCADE,
-        db_column='id_district',
+    name = models.CharField(
+        db_column='name',
+        max_length=64,
         null=False,
-        blank=False,
-        related_name='suppliers'
+        blank=False
     )
 
-    name = models.CharField(
-        db_column='tx_name',
-        max_length=54,
+    legal_document = models.CharField(
+        db_column='legal_document',
+        max_length=20,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -735,14 +750,14 @@ class Supplier(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -754,7 +769,7 @@ class Supplier(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Supplier {self.id} - {str(self.name)} - {str(self.district)}"
+        return f"Supplier {self.id} - {self.name} - {self.legal_document}"
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -778,30 +793,30 @@ class Product(models.Model):
     )
 
     name = models.CharField(
-        db_column='tx_name',
-        max_length=104,
+        db_column='name',
+        max_length=64,
         null=False,
         blank=False
     )
 
     cost_price = models.DecimalField(
-        db_column='nb_cost_price',
-        max_digits=10,
-        decimal_places=4,
+        db_column='cost_price',
+        max_digits=16,
+        decimal_places=2,
         null=False,
         blank=False
     )
 
     sale_price = models.DecimalField(
-        db_column='nb_sale_price',
-        max_digits=10,
-        decimal_places=4,
+        db_column='sale_price',
+        max_digits=16,
+        decimal_places=2,
         null=False,
         blank=False
     )
 
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -809,14 +824,14 @@ class Product(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -828,7 +843,7 @@ class Product(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Product {self.id} - {str(self.name)}"
+        return f"Product {self.id} - {self.name}"
 
 class SaleItem(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -852,31 +867,15 @@ class SaleItem(models.Model):
     )
 
     quantity = models.DecimalField(
-        db_column='nb_quantity',
-        max_digits=10,
+        db_column='quantity',
+        max_digits=16,
         decimal_places=3,
         null=False,
         blank=False
     )
 
-    sale_price = models.DecimalField(
-        db_column='nb_sale_price',
-        max_digits=10,
-        decimal_places=4,
-        null=False,
-        blank=False
-    )
-
-    subtotal = models.DecimalField(
-        db_column='nb_subtotal',
-        max_digits=10,
-        decimal_places=4,
-        null=False,
-        blank=False
-    )
-
     is_active = models.BooleanField(
-        db_column='cs_active',
+        db_column='active',
         default=True,
         null=False,
         blank=False
@@ -884,14 +883,14 @@ class SaleItem(models.Model):
 
     created_at = models.DateTimeField(
         auto_now_add=True,
-        db_column='dt_created_at',
+        db_column='created_at',
         null=False,
         blank=False
     )
 
     modified_at = models.DateTimeField(
         auto_now=True,
-        db_column='dt_modified_at',
+        db_column='modified_at',
         null=False,
         blank=False
     )
@@ -903,4 +902,4 @@ class SaleItem(models.Model):
         managed = True
 
     def __str__(self):
-        return f"Sale Item {self.id} - {str(self.sale)}"
+        return f"Sale Item {self.id} - {self.sale}"

@@ -35,14 +35,14 @@ class BranchOfficeAdmin(admin.ModelAdmin):
 
 @admin.register(models.MaritalStatus)
 class MaritalStatusAdmin(admin.ModelAdmin):
-    list_display = ['id', 'description', 'is_active', 'created_at', 'modified_at']
-    search_fields = ['description']
+    list_display = ['id', 'name', 'is_active', 'created_at', 'modified_at']
+    search_fields = ['name']
 
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'marital_status', 'district', 'salary', 'gender', 'is_active', 'created_at', 'modified_at']
-    search_fields = ['name', 'gender', 'district__name', 'marital_status__description']
+    list_display = ['id', 'name', 'marital_status', 'district', 'income', 'gender', 'is_active', 'created_at', 'modified_at']
+    search_fields = ['name', 'gender', 'district__name', 'marital_status__name']
 
 
 @admin.register(models.Department)
@@ -53,8 +53,8 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'manager', 'department', 'marital_status', 'salary', 'adminission', 'birth', 'is_active', 'created_at', 'modified_at']
-    search_fields = ['name', 'department__name', 'marital_status__description', 'manager__name']
+    list_display = ['id', 'name', 'district', 'department', 'marital_status', 'salary', 'admission', 'birth', 'is_active', 'created_at', 'modified_at']
+    search_fields = ['name', 'department__name', 'marital_status__name', 'district__name']
 
 
 @admin.register(models.Sale)
@@ -77,23 +77,23 @@ class SalePaymentAdmin(admin.ModelAdmin):
 
 @admin.register(models.ProductGroup)
 class ProductGroupAdmin(admin.ModelAdmin):
-    list_display = ['id', 'description', 'commission_percentage', 'gain_percentage', 'is_active', 'created_at', 'modified_at']
-    search_fields = ['description']
+    list_display = ['id', 'name', 'commission_percentage', 'gain_percentage', 'is_active', 'created_at', 'modified_at']
+    search_fields = ['name']
 
 
 @admin.register(models.Supplier)
 class SupplierAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'district', 'is_active', 'created_at', 'modified_at']
-    search_fields = ['name', 'district__name']
+    list_display = ['id', 'name', 'legal_document', 'is_active', 'created_at', 'modified_at']
+    search_fields = ['name', 'legal_document']
 
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'product_group', 'supplier', 'cost_price', 'sale_price', 'is_active', 'created_at', 'modified_at']
-    search_fields = ['name', 'product_group__description', 'supplier__name']
+    search_fields = ['name', 'product_group__name', 'supplier__name']
 
 
 @admin.register(models.SaleItem)
 class SaleItemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'sale', 'product', 'quantity', 'sale_price', 'subtotal', 'is_active', 'created_at', 'modified_at']
+    list_display = ['id', 'sale', 'product', 'quantity', 'is_active', 'created_at', 'modified_at']
     search_fields = ['sale__customer__name', 'product__name']
