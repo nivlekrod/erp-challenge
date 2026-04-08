@@ -15,6 +15,12 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    restart: always
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000

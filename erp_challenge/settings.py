@@ -86,9 +86,10 @@ DATABASES = {
 		'NAME': os.environ.get('DB_NAME', 'erp_challenge_db'),
 		'USER': os.environ.get('DB_USER', 'postgres'),
 		'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
-		'HOST': os.environ.get('DB_HOST', 'localhost'),
-		# 'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
-		'PORT': os.environ.get('DB_PORT', '5432'),
+		#'HOST': os.environ.get('DB_HOST', 'localhost'),
+		'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
+		#'PORT': os.environ.get('DB_PORT', '5432'),
+		'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
 	}
 }
 
@@ -128,3 +129,10 @@ STATIC_URL = 'static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = default_methods
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = 'America/Belem'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

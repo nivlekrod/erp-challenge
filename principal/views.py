@@ -5,11 +5,16 @@ from .serializers import CustomerSerializer, ProductSerializer, CitySerializer, 
     DistrictSerializer, BranchOfficeSerializer, MaritalStatusSerializer, DepartmentSerializer, EmployeeSerializer, \
     SaleSerializer, MeansPaymentSerializer, SalePaymentSerializer, ProductGroupSerializer, SupplierSerializer, \
     SaleItemSerializer
-
+from principal import tasks
 
 class StateViewSet(viewsets.ModelViewSet):
     queryset = State.objects.all()
     serializer_class = StateSerializer
+
+    def create(self, request, *args, **kwargs):
+        instance = super(StateViewSet, self).create(request, *args, **kwargs)
+        tasks.create_file.apply_async([instance.data.get('id')])
+        return instance
 
 class CityViewSet(viewsets.ModelViewSet):
     queryset = City.objects.all()
