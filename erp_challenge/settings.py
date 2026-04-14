@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from corsheaders.defaults import default_methods
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -28,20 +28,21 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.postgres',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'principal.apps.PrincipalConfig',
-    'rest_framework',
-    'django_filters',
+	'daphne',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.postgres'
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'principal.apps.PrincipalConfig',
+	'rest_framework',
+	'django_filters',
+	'channels'
 ]
 
 REST_FRAMEWORK = {
@@ -83,22 +84,33 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'erp_challenge.wsgi.application'
+ASGI_APPLICATION = 'erp_challenge.asgi.application'
 
+CHANNEL_LAYERS = {
+	'default': {
+		'BACKEND': 'channels_redis.core.RedisChannelLayer',
+		'CONFIG': {
+			'hosts': [('localhost', 6379)],
+		}
+	}
+
+}
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'erp_challenge_db',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': os.environ.get('DB_NAME', 'erp_challenge_db'),
+		'USER': os.environ.get('DB_USER', 'postgres'),
+		'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
+		#'HOST': os.environ.get('DB_HOST', 'localhost'),
+		'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
+		#'PORT': os.environ.get('DB_PORT', '5432'),
+		'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
+	}
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -118,7 +130,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -130,7 +141,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
@@ -138,3 +148,12 @@ STATIC_URL = 'static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = default_methods
+
+# Celery settings
+# CELERY_BROKER_URL = 'redis://redis:6379/0' # using docker
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = 'America/Belem'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
