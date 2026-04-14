@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
-	'django.contrib.postgres'
+	'django.contrib.postgres',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'principal.apps.PrincipalConfig',
@@ -46,41 +46,41 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10,
-    'COERCE_DECIMAL_TO_STRING': False,
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.OrderingFilter',
-    )
+	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+	'PAGE_SIZE': 10,
+	'COERCE_DECIMAL_TO_STRING': False,
+	'DEFAULT_FILTER_BACKENDS': (
+		'django_filters.rest_framework.DjangoFilterBackend',
+		'rest_framework.filters.OrderingFilter',
+	)
 }
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+	'django.middleware.security.SecurityMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'erp_challenge.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+			],
+		},
+	},
 ]
 
 WSGI_APPLICATION = 'erp_challenge.wsgi.application'
@@ -105,10 +105,10 @@ DATABASES = {
 		'NAME': os.environ.get('DB_NAME', 'erp_challenge_db'),
 		'USER': os.environ.get('DB_USER', 'postgres'),
 		'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
-		#'HOST': os.environ.get('DB_HOST', 'localhost'),
-		'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
-		#'PORT': os.environ.get('DB_PORT', '5432'),
-		'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
+		'HOST': os.environ.get('DB_HOST', 'localhost'),
+		# 'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
+		'PORT': os.environ.get('DB_PORT', '5432'),
+		# 'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
 	}
 }
 
@@ -116,18 +116,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+	{
+		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	},
+	{
+		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	},
 ]
 
 # Internationalization
