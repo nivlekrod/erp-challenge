@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+	'daphne',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'principal.apps.PrincipalConfig',
 	'rest_framework',
+	'django_filters',
+	'channels'
 ]
 
 REST_FRAMEWORK = {
@@ -76,6 +79,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'erp_challenge.wsgi.application'
+ASGI_APPLICATION = 'erp_challenge.asgi.application'
+
+CHANNEL_LAYERS = {
+	'default': {
+		'BACKEND': 'channels_redis.core.RedisChannelLayer',
+		'CONFIG': {
+			'hosts': [('localhost', 6379)],
+		}
+	}
+
+}
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -86,10 +100,9 @@ DATABASES = {
 		'NAME': os.environ.get('DB_NAME', 'erp_challenge_db'),
 		'USER': os.environ.get('DB_USER', 'postgres'),
 		'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
-		#'HOST': os.environ.get('DB_HOST', 'localhost'),
-		'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
-		#'PORT': os.environ.get('DB_PORT', '5432'),
-		'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
+		'HOST': os.environ.get('DB_HOST', 'localhost'),
+		# 'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
+		'PORT': os.environ.get('DB_PORT', '5432'),
 	}
 }
 
@@ -130,7 +143,9 @@ STATIC_URL = 'static/'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = default_methods
 
-CELERY_BROKER_URL = 'redis://redis:6379/0'
+# Celery settings
+# CELERY_BROKER_URL = 'redis://redis:6379/0' # using docker
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = 'America/Belem'
