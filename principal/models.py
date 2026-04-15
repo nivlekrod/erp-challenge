@@ -322,14 +322,14 @@ class Customer(models.Model):
         blank=False
     )
 
-    GENDER_CHOICES = [
-        ('M', 'MALE'),
-        ('F', 'FEMALE'),
-    ]
+    class Gender(models.TextChoices):
+        MALE = 'M', 'Male'
+        FEMALE = 'F', 'Female'
+
     gender = models.CharField(
         db_column='gender',
         max_length=1,
-        choices=GENDER_CHOICES,
+        choices=Gender,
         null=False,
         blank=False
     )
@@ -461,14 +461,14 @@ class Employee(models.Model):
         blank=False
     )
 
-    GENDER_CHOICES = [
-        ('M', 'MALE'),
-        ('F', 'FEMALE'),
-    ]
+    class Gender(models.TextChoices):
+        MALE = 'M', 'Male'
+        FEMALE = 'F', 'Female'
+
     gender = models.CharField(
         db_column='gender',
         max_length=1,
-        choices=GENDER_CHOICES,
+        choices=Gender,
         null=False,
         blank=False
     )
