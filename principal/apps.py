@@ -2,4 +2,8 @@ from django.apps import AppConfig
 
 
 class PrincipalConfig(AppConfig):
-    name = 'principal'
+	name = 'principal'
+
+	def ready(self):
+		import principal.receivers
+		super().ready()

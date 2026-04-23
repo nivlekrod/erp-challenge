@@ -72,7 +72,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class SaleSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Sale
-		fields = ['id', 'branch_office', 'employee', 'customer', 'sold_at', 'is_active', 'created_at', 'modified_at']
+		fields = '__all__'
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 
@@ -114,5 +114,5 @@ class ProductSerializer(serializers.ModelSerializer):
 class SaleItemSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = SaleItem
-		fields = ['id', 'sale', 'product', 'quantity', 'is_active', 'created_at', 'modified_at']
+		fields = '__all__'
 		read_only_fields = ['id', 'created_at', 'modified_at']

@@ -503,71 +503,6 @@ class Employee(models.Model):
     def __str__(self):
         return f"Employee {self.name}"
 
-class Sale(models.Model):
-    id = models.AutoField(primary_key=True, null=False)
-
-    branch_office = models.ForeignKey(
-        to='BranchOffice',
-        on_delete=models.CASCADE,
-        db_column='id_branch',
-        null=False,
-        blank=False,
-        related_name='sales'
-    )
-
-    employee = models.ForeignKey(
-        to='Employee',
-        on_delete=models.CASCADE,
-        db_column='id_employee',
-        null=False,
-        blank=False,
-        related_name='sales'
-    )
-
-    customer = models.ForeignKey(
-        to='Customer',
-        on_delete=models.CASCADE,
-        db_column='id_customer',
-        null=False,
-        blank=False,
-        related_name='sales'
-    )
-
-    sold_at = models.DateTimeField(
-        db_column='date',
-        null=False,
-        blank=False
-    )
-
-    is_active = models.BooleanField(
-        db_column='active',
-        default=True,
-        null=False,
-        blank=False
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        db_column='created_at',
-        null=False,
-        blank=False
-    )
-
-    modified_at = models.DateTimeField(
-        auto_now=True,
-        db_column='modified_at',
-        null=False,
-        blank=False
-    )
-
-    class Meta:
-        db_table = 'sale'
-        verbose_name = 'Sale'
-        verbose_name_plural = 'Sales'
-        managed = True
-
-    def __str__(self):
-        return f"Sale {self.id} - Customer: {self.customer.name}"
 
 class MeansPayment(models.Model):
     id = models.AutoField(primary_key=True, null=False)
@@ -844,6 +779,81 @@ class Product(models.Model):
 
     def __str__(self):
         return f"Product {self.id} - {self.name}"
+
+class Sale(models.Model):
+    id = models.AutoField(primary_key=True, null=False)
+
+    branch_office = models.ForeignKey(
+        to='BranchOffice',
+        on_delete=models.CASCADE,
+        db_column='id_branch',
+        null=False,
+        blank=False,
+        related_name='sales'
+    )
+
+    employee = models.ForeignKey(
+        to='Employee',
+        on_delete=models.CASCADE,
+        db_column='id_employee',
+        null=False,
+        blank=False,
+        related_name='sales'
+    )
+
+    customer = models.ForeignKey(
+        to='Customer',
+        on_delete=models.CASCADE,
+        db_column='id_customer',
+        null=False,
+        blank=False,
+        related_name='sales'
+    )
+
+    total_amount = models.DecimalField(
+        db_column='total_amount',
+        max_digits=16,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        default=0
+    )
+
+    sold_at = models.DateTimeField(
+        db_column='date',
+        null=False,
+        blank=False
+    )
+
+    is_active = models.BooleanField(
+        db_column='active',
+        default=True,
+        null=False,
+        blank=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        db_column='created_at',
+        null=False,
+        blank=False
+    )
+
+    modified_at = models.DateTimeField(
+        auto_now=True,
+        db_column='modified_at',
+        null=False,
+        blank=False
+    )
+
+    class Meta:
+        db_table = 'sale'
+        verbose_name = 'Sale'
+        verbose_name_plural = 'Sales'
+        managed = True
+
+    def __str__(self):
+        return f"Sale {self.id} - Customer: {self.customer.name}"
 
 class SaleItem(models.Model):
     id = models.AutoField(primary_key=True, null=False)

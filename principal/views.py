@@ -68,6 +68,11 @@ class SaleViewSet(viewsets.ModelViewSet):
     serializer_class = SaleSerializer
     filterset_fields = ['branch_office', 'employee', 'customer', 'is_active']
 
+    def create(self, request, *args, **kwargs):
+        instance = super(SaleViewSet, self).create(request, *args, **kwargs)
+        tasks.send_sales_email.apply_async([instance.data.get('id')])
+        return instance
+
 class MeansPaymentViewSet(viewsets.ModelViewSet):
     queryset = MeansPayment.objects.all()
     serializer_class = MeansPaymentSerializer

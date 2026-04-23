@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="erp_challenge_db@localhost" uuid="cb1a6d20-af3b-49cb-b9af-91497277fc22">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="erp_challenge@docker" uuid="c9382578-f854-4574-8e9f-e61e6fc9cef0">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
@@ -16,7 +9,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5433/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="erp_challenge_db@localhost [2]" uuid="af9c1135-179a-4373-878b-df7dd99727d0">
+    <data-source source="LOCAL" name="erp_challenge_db@localhost" uuid="ca3a8173-53b3-4802-86fb-6ef6d33ea7ed">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
