@@ -1,4 +1,5 @@
 from django.db import models
+from principal.managers import SaleItemManager
 
 # Create your models here.
 class State(models.Model):
@@ -560,6 +561,15 @@ class Sale(models.Model):
         blank=False
     )
 
+    total = models.DecimalField(
+        db_column='total',
+        max_digits=16,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        default=0
+    )
+
     class Meta:
         db_table = 'sale'
         verbose_name = 'Sale'
@@ -894,6 +904,8 @@ class SaleItem(models.Model):
         null=False,
         blank=False
     )
+
+    objects = SaleItemManager()
 
     class Meta:
         db_table = 'sale_item'

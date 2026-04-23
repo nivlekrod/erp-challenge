@@ -107,8 +107,8 @@ DATABASES = {
 		'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
 		'HOST': os.environ.get('DB_HOST', 'localhost'),
 		# 'HOST': os.environ.get('DB_HOST', 'db'), # enable to use docker
-		'PORT': os.environ.get('DB_PORT', '5432'),
-		# 'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
+		# 'PORT': os.environ.get('DB_PORT', '5432'),
+		'PORT': os.environ.get('DB_PORT', '5433'), # enable to use docker (postgreSQL installed on PC)
 	}
 }
 
@@ -150,10 +150,27 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = default_methods
 
 # Celery settings
-# CELERY_BROKER_URL = 'redis://redis:6379/0' # using docker
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0' # using docker
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = 'America/Belem'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        }
+    }
+}
