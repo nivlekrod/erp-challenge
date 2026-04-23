@@ -71,11 +71,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
 		          'birth', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
+
 class SaleItemReadSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = SaleItem
 		fields = ['product', 'quantity']
 		read_only_fields = ['id', 'created_at', 'modified_at']
+
 
 class SaleSerializer(serializers.ModelSerializer):
 	items_data = serializers.JSONField(write_only=True)
@@ -83,7 +85,8 @@ class SaleSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Sale
-		fields = ['branch_office', 'employee', 'customer', 'sold_at', 'items_data', 'sale_items']
+		fields = ['id', 'branch_office', 'employee', 'customer', 'sold_at', 'items_data',
+		          'sale_items']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
 	def create(self, validated_data):
