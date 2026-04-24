@@ -17,10 +17,10 @@ app.autodiscover_tasks()
 app.conf.timezone = 'America/Belem'
 
 TASKS = {
-    'create_customer_file': {
-        'task': 'principal.tasks.create_customer_file',
-        'schedule': 5
-    }
+    # 'create_customer_file': {
+    #     'task': 'principal.tasks.create_customer_file',
+    #     'schedule': 5
+    # }
 }
 
 app.conf.beat_schedule = TASKS
