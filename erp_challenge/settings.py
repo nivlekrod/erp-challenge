@@ -90,7 +90,7 @@ CHANNEL_LAYERS = {
 	'default': {
 		'BACKEND': 'channels_redis.core.RedisChannelLayer',
 		'CONFIG': {
-			'hosts': [('localhost', 6379)],
+			'hosts': [('redis', 6379)],
 		}
 	}
 
@@ -157,6 +157,16 @@ CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = 'America/Belem'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' # Ou o host do seu provedor
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = '' # Use variáveis de ambiente por segurança
+DEFAULT_FROM_EMAIL = 'ERP Challenge <>'
+
 
 LOGGING = {
     'version': 1,
