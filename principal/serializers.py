@@ -1,3 +1,5 @@
+from django.db import transaction
+
 from principal.models import (State, City, Zone, District, BranchOffice, MaritalStatus, Customer,
 							  Department,
 							  Employee, Sale, MeansPayment, SalePayment, ProductGroup, Supplier,
@@ -68,12 +70,39 @@ class EmployeeSerializer(serializers.ModelSerializer):
 		fields = ['id', 'district', 'department', 'marital_status', 'name', 'salary', 'admission', 'birth', 'is_active', 'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 
+class SaleItemReadSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = SaleItem
+		fields = ['product', 'quantity']
+		read_only_fields = ['id', 'created_at', 'modified_at']
 
 class SaleSerializer(serializers.ModelSerializer):
+	items_data = serializers.JSONField(write_only=True)
+	sale_items = SaleItemReadSerializer(many=True, read_only=True)
+
 	class Meta:
 		model = Sale
-		fields = ['id', 'branch_office', 'employee', 'customer', 'sold_at', 'is_active', 'created_at', 'modified_at']
-		read_only_fields = ['id', 'created_at', 'modified_at']
+		fields = ['id', 'branch_office', 'employee', 'customer', 'sold_at', 'is_active', 'created_at', 'modified_at', 'items_data', 'sale_items', 'total']
+		read_only_fields = ['id', 'created_at', 'modified_at', 'total']
+
+	def create(self, validated_data):
+		items_data = validated_data.pop('items_data')
+
+		print(f"[DEBUG] items_data recebido: {items_data}")
+
+		with transaction.atomic():
+			sale = Sale.objects.create(**validated_data)
+
+			for item in items_data:
+				print(f"[DEBUG] criando item: {item}")
+				SaleItem.objects.create(
+					sale=sale,
+					product_id=item['product_id'],
+					quantity=item['quantity'],
+				)
+			sale.refresh_from_db()
+
+			return sale
 
 
 class MeansPaymentSerializer(serializers.ModelSerializer):
