@@ -157,3 +157,20 @@ CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = 'America/Belem'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
+# settings.py
+
+# 1. Troque o backend de 'console' para o de SMTP real
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# 2. Configurações do Servidor (Exemplo Zoho)
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'lumaandrade@zohomail.com'
+EMAIL_HOST_PASSWORD = 'M3Mn9qZiF5Fb' # Não é a senha da conta, é a "Senha de App"
+
+# 3. O e-mail que aparecerá como remetente
+DEFAULT_FROM_EMAIL = 'ERP Challenge <lumaandrade@zohomail.com>'

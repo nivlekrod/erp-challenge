@@ -52,7 +52,8 @@ class MaritalStatusSerializer(serializers.ModelSerializer):
 class CustomerSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Customer
-		fields = ['id', 'marital_status', 'district', 'name', 'income', 'gender', 'is_active',
+		fields = ['id', 'marital_status', 'district', 'name', 'income', 'gender', 'email',
+				  'is_active',
 		          'created_at', 'modified_at']
 		read_only_fields = ['id', 'created_at', 'modified_at']
 

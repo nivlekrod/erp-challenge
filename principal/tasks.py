@@ -27,7 +27,7 @@ def create_customer_file():
 def send_sales_email(sale_id):
 	try:
 		sale = models.Sale.objects.select_related('customer', 'employee').get(id=sale_id)
-		items = sale.sale_items.all()
+		items = sale.sale_items.select_related('product').all()
 
 		subject = f"Confirmação de Venda #{sale.id} - ERP Challenge"
 
@@ -45,18 +45,21 @@ def send_sales_email(sale_id):
 			f"Obrigado por comprar conosco!"
 		)
 
-		# Envio real
-		# send_mail(
-		# 	subject=subject,
-		# 	message=message,
-		# 	from_email=settings.DEFAULT_FROM_EMAIL,
-		# 	recipient_list=[sale.customer.email],
-		# 	fail_silently=False,
-		# )
-		# Envio fake
 		print(message)
+		print(sale.customer.email)
 
-		return f"E-mail da venda {sale_id} enviado com sucesso!"
+		# Envio real
+		send_mail(
+			subject=subject,
+			message=message,
+			from_email=settings.DEFAULT_FROM_EMAIL,
+			recipient_list=[sale.customer.email],
+			fail_silently=False,
+		)
+		# Envio fake
+
+
+		return f"E-mail da venda {sale_id} enviado com sucesso para {sale.customer.email}!"
 
 	except models.Sale.DoesNotExist:
 		return f"Erro: Venda {sale_id} não encontrada."

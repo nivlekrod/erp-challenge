@@ -314,6 +314,13 @@ class Customer(models.Model):
         blank=False
     )
 
+    email = models.EmailField(
+        db_column='email',
+        max_length=254,
+        null=False,
+        blank=False
+    )
+
     income = models.DecimalField(
         db_column='income',
         max_digits=16,
